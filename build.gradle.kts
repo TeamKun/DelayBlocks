@@ -4,13 +4,14 @@ plugins {
     kotlin("kapt").version(Dependencies.Kotlin.version)
 }
 
-group = "com.reyadayer"
+group = "net.kunmc.lab"
 version = "1.0-SNAPSHOT"
 
 repositories {
     jcenter()
     mavenCentral()
     maven(Dependencies.Spigot.repository)
+    maven(Dependencies.SonaType.repository)
 }
 
 dependencies {
