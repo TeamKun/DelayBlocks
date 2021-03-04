@@ -22,10 +22,7 @@ class BlockListener(private val plugin: DelayBlocks) : Listener {
             block.setMeta(plugin, MetadataKey.IsBroken, true)
             object : BukkitRunnable() {
                 override fun run() {
-                    event.block.drops.forEach {
-                        block.location.world?.dropItem(block.location, it)
-                    }
-                    block.type = Material.AIR
+                    event.block.breakNaturally()
                 }
             }.runTaskLater(plugin, plugin.seconds * 20L)
         }
@@ -35,7 +32,7 @@ class BlockListener(private val plugin: DelayBlocks) : Listener {
     fun onPlace(event: BlockPlaceEvent) {
         val blockType = event.block.type
         val blockData = event.block.blockData.clone()
-        event.block.type = Material.AIR
+        event.isCancelled = true
         object : BukkitRunnable() {
             override fun run() {
                 setBlock(event.block, blockType, blockData)
