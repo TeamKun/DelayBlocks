@@ -32,7 +32,7 @@ class BlockListener(private val plugin: DelayBlocks) : Listener {
     fun onPlace(event: BlockPlaceEvent) {
         val blockType = event.block.type
         val blockData = event.block.blockData.clone()
-        event.isCancelled = true
+        event.block.type = Material.AIR
         object : BukkitRunnable() {
             override fun run() {
                 setBlock(event.block, blockType, blockData)
